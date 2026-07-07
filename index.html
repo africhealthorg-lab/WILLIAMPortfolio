@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>William Nguli Wanyoike — Manifest</title>
+<style>
+  :root{
+    --bg:#14171C;
+    --panel:#1E232B;
+    --panel-2:#242A33;
+    --line:#333B47;
+    --amber:#E8A33D;
+    --teal:#5B8C7B;
+    --text:#F2EFE9;
+    --muted:#8B93A1;
+    
+    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-display: "Space Grotesk", "Segoe UI Display", var(--font-sans);
+    --font-mono: "SF Mono", SFMono-Regular, Consolas, "Fira Code", "Liberation Mono", Menlo, monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-sans);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{font-family:var(--font-display); letter-spacing: -0.01em;}
+  .mono{font-family:var(--font-mono); letter-spacing: 0.05em;}
+
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    opacity:0.05;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  a{color:inherit; text-decoration:none;}
+
+  /* ===== NAV ===== */
+  nav{
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 6vw;
+    background:rgba(20,23,28,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .logo{font-weight:700; font-size:1.05rem; letter-spacing:0.02em; font-family:var(--font-display);}
+  .logo span{color:var(--amber);}
+  .navlinks{display:flex; gap:28px; font-size:0.85rem;}
+  .navlinks a{
+    color:var(--muted);
+    font-family:var(--font-mono);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    font-size:0.72rem;
+    position:relative;
+    padding-bottom:4px;
+    transition:color 0.2s;
+  }
+  .navlinks a:hover, .navlinks a.active{color:var(--amber);}
+  .navlinks a::after{
+    content:""; position:absolute; left:0; bottom:0;
+    width:0; height:1px; background:var(--amber);
+    transition:width 0.25s;
+  }
+  .navlinks a:hover::after{width:100%;}
+  .navtoggle{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none;}
+  .navtoggle span{width:22px; height:2px; background:var(--text); transition: 0.2s;}
+
+  section{position:relative; z-index:1; padding:90px 6vw;}
+
+  /* ===== HERO ===== */
+  .hero{
+    min-height:88vh;
+    display:grid;
+    grid-template-columns:1fr 1.3fr;
+    gap:50px;
+    align-items:center;
+    padding-top:60px;
+  }
+  .id-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:28px;
+    position:relative;
+  }
+  .id-card::before{
+    content:"";
+    position:absolute; top:0; left:0; right:0; height:4px;
+    background:repeating-linear-gradient(90deg, var(--amber) 0 10px, transparent 10px 18px);
+  }
+  .id-top{display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:18px;}
+  .id-tag{font-size:0.65rem; letter-spacing:0.12em; color:var(--muted); text-transform:uppercase;}
+  .status-badge{
+    display:inline-flex; align-items:center; gap:6px;
+    background:rgba(91,140,123,0.15);
+    border:1px solid var(--teal);
+    color:var(--teal);
+    padding:4px 10px; border-radius:20px;
+    font-size:0.68rem; letter-spacing:0.06em; text-transform:uppercase;
+  }
+  .status-badge::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--teal);}
+  
+  .photo-frame{
+    width:100%; aspect-ratio:1/1;
+    background:linear-gradient(160deg,#1e232b,#14171c);
+    border:1px dashed var(--amber);
+    border-radius:4px;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--amber); font-size:0.72rem;
+    font-family:var(--font-mono);
+    margin-bottom:18px;
+    text-align:center;
+    letter-spacing:0.05em;
+    padding:20px;
+    overflow: hidden;
+  }
+  .photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .id-row{display:flex; justify-content:space-between; padding:8px 0; border-top:1px dashed var(--line); font-size:0.78rem;}
+  .id-row .k{color:var(--muted); font-family:var(--font-mono); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.06em;}
+
+  .hero-copy .eyebrow{
+    font-family:var(--font-mono);
+    color:var(--amber);
+    font-size:0.78rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:"//"; color:var(--muted);}
+  .hero-copy h1{font-size:clamp(2.4rem,5vw,4rem); line-height:1.05; font-weight:700; margin-bottom:22px;}
+  .hero-copy h1 .accent{color:var(--amber);}
+  .hero-copy p.lead{font-size:1.05rem; color:var(--muted); max-width:520px; margin-bottom:34px;}
+  .cta-row{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{
+    padding:13px 26px; border-radius:2px; font-size:0.85rem; font-weight:600;
+    letter-spacing:0.02em; cursor:pointer; border:1px solid transparent;
+    font-family:var(--font-sans);
+    transition:all 0.2s;
+    display: inline-block;
+  }
+  .btn-primary{background:var(--amber); color:#14171C;}
+  .btn-primary:hover{background:#f0b45c;}
+  .btn-outline{border-color:var(--line); color:var(--text);}
+  .btn-outline:hover{border-color:var(--amber); color:var(--amber);}
+
+  .skill-ticker{
+    margin-top:44px; padding-top:24px; border-top:1px solid var(--line);
+    display:flex; gap:10px; flex-wrap:wrap;
+  }
+  .skill-chip{
+    font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.04em;
+    padding:6px 12px; border:1px solid var(--line); border-radius:20px; color:var(--muted);
+  }
+
+  /* ===== SECTION HEADERS ===== */
+  .sec-head{display:flex; align-items:baseline; gap:16px; margin-bottom:48px;}
+  .sec-num{font-family:var(--font-mono); color:var(--amber); font-size:0.85rem;}
+  .sec-head h2{font-size:clamp(1.6rem,3vw,2.2rem); font-weight:600;}
+  .sec-line{flex:1; height:1px; background:var(--line);}
+
+  /* ===== CREDENTIALS MANIFEST STRIP ===== */
+  .manifest{background:var(--panel); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .manifest-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:1px; background:var(--line);
+    border:1px solid var(--line);
+  }
+  .stamp{
+    background:var(--panel); padding:22px 20px;
+    display:flex; flex-direction:column; gap:8px;
+  }
+  .stamp .stamp-icon{font-family:var(--font-mono); color:var(--teal); font-size:0.7rem; letter-spacing:0.08em; text-transform:uppercase; border:1px solid var(--teal); border-radius:50%; width:34px; height:34px; display:flex; align-items:center; justify-content:center;}
+  .stamp .stamp-title{font-weight:600; font-size:0.92rem;}
+  .stamp .stamp-sub{color:var(--muted); font-size:0.75rem; font-family:var(--font-mono);}
+
+  /* ===== EDUCATION ===== */
+  .edu-list{display:flex; flex-direction:column; gap:0;}
+  .edu-item{
+    display:grid; grid-template-columns:140px 1fr 140px;
+    gap:20px; align-items:center;
+    padding:20px 0; border-bottom:1px solid var(--line);
+  }
+  .edu-item:first-child{border-top:1px solid var(--line);}
+  .edu-code{font-family:var(--font-mono); color:var(--muted); font-size:0.75rem;}
+  .edu-name{font-weight:600; font-size:1.02rem;}
+  .edu-org{color:var(--muted); font-size:0.85rem; margin-top:2px;}
+  .pill{
+    justify-self:end; font-family:var(--font-mono); font-size:0.65rem;
+    letter-spacing:0.06em; text-transform:uppercase; padding:5px 12px; border-radius:20px;
+    text-align:center; white-space:nowrap;
+  }
+  .pill.done{background:rgba(91,140,123,0.15); color:var(--teal); border:1px solid var(--teal);}
+  .pill.progress{background:rgba(232,163,61,0.15); color:var(--amber); border:1px solid var(--amber);}
+  .pill.spec{background:rgba(139,147,161,0.12); color:var(--text); border:1px solid var(--muted);}
+
+  /* ===== SKILLS ===== */
+  .skills-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px;}
+  .skill-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:4px;
+    padding:22px; position:relative;
+  }
+  .skill-card .bar-label{display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:10px;}
+  .bar-label .lvl{color:var(--muted); font-family:var(--font-mono); font-size:0.7rem;}
+  .bar-track{height:5px; background:var(--panel-2); border-radius:3px; overflow:hidden;}
+  .bar-fill{height:100%; background:var(--amber); border-radius:3px;}
+
+  /* ===== EXPERIENCE TIMELINE ===== */
+  .timeline{position:relative; padding-left:32px;}
+  .timeline::before{content:""; position:absolute; left:6px; top:6px; bottom:6px; width:1px; background:var(--line);}
+  .t-item{position:relative; padding-bottom:44px;}
+  .t-item:last-child{padding-bottom:0;}
+  .t-item::before{
+    content:""; position:absolute; left:-32px; top:4px;
+    width:13px; height:13px; border-radius:50%;
+    background:var(--bg); border:2px solid var(--amber);
+  }
+  .t-date{font-family:var(--font-mono); color:var(--amber); font-size:0.72rem; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:6px;}
+  .t-role{font-weight:600; font-size:1.1rem; margin-bottom:4px;}
+  .t-org{color:var(--teal); font-size:0.85rem; margin-bottom:10px; font-family:var(--font-mono);}
+  .t-desc{color:var(--muted); font-size:0.9rem; max-width:640px;}
+
+  /* ===== SERVICES ===== */
+  .services-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px;}
+  .service-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:4px; padding:26px;
+    transition:border-color 0.2s, transform 0.2s;
+  }
+  .service-card:hover{border-color:var(--amber); transform:translateY(-3px);}
+  .service-tag{font-family:var(--font-mono); color:var(--muted); font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:14px; display:block;}
+  .service-card h3{font-size:1.05rem; margin-bottom:10px;}
+  .service-card p{color:var(--muted); font-size:0.87rem;}
+
+  /* ===== CONTACT ===== */
+  .contact-wrap{
+    display:grid; grid-template-columns:1fr 1fr; gap:50px;
+    background:var(--panel); border:1px solid var(--line); border-radius:4px; padding:48px;
+  }
+  .contact-list{display:flex; flex-direction:column; gap:22px;}
+  .contact-row{display:flex; gap:16px; align-items:flex-start;}
+  .contact-icon{
+    width:38px; height:38px; border-radius:50%; border:1px solid var(--amber); color:var(--amber);
+    display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:0.75rem; flex-shrink:0;
+  }
+  .contact-row .k{font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); font-family:var(--font-mono); margin-bottom:3px;}
+  .contact-row .v{font-size:0.95rem;}
+  .form input, .form textarea{
+    width:100%; background:var(--panel-2); border:1px solid var(--line); color:var(--text);
+    padding:12px 14px; border-radius:2px; font-family:var(--font-sans); font-size:0.9rem; margin-bottom:14px;
+  }
+  .form textarea{resize:vertical; min-height:100px;}
+  .form input:focus, .form textarea:focus{outline:none; border-color:var(--amber);}
+  .form label{font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); font-family:var(--font-mono); display:block; margin-bottom:6px;}
+
+  footer{text-align:center; padding:30px 6vw; color:var(--muted); font-size:0.75rem; font-family:var(--font-mono); border-top:1px solid var(--line);}
+
+  @media (max-width:880px){
+    .hero{grid-template-columns:1fr; padding-top:20px;}
+    .navlinks{
+      display:none;
+      flex-direction:column;
+      position:absolute;
+      top:100%; left:0; right:0;
+      background:var(--panel);
+      padding:20px 6vw;
+      border-bottom:1px solid var(--line);
+      gap:16px;
+    }
+    .navlinks.active{display:flex;}
+    .navtoggle{display:flex;}
+    .edu-item{grid-template-columns:1fr; gap:6px;}
+    .pill{justify-self:start;}
+    .contact-wrap{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">WNW<span>.MANIFEST</span></div>
+  <div class="navlinks" id="navLinks">
+    <a href="#home">Home</a>
+    <a href="#education">Education</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <button class="navtoggle" aria-label="menu" id="navToggle">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<section class="hero" id="home">
+  <div class="id-card">
+    <div class="id-top">
+      <span class="id-tag mono">ID · WNW-01</span>
+      <span class="status-badge">Open to work</span>
+    </div>
+    <div class="photo-frame">
+      <img src="avatar.jpg" alt="[ PLACE RECTANGLE HEADSHOT HERE ]">
+    </div>
+    <div class="id-row"><span class="k">Name</span><span>William N. Wanyoike</span></div>
+    <div class="id-row"><span class="k">Nationality</span><span>Kenyan</span></div>
+    <div class="id-row"><span class="k">Based in</span><span>Nairobi, KE</span></div>
+    <div class="id-row"><span class="k">Languages</span><span>English (Fluent), German (Basic)</span></div>
+  </div>
+
+  <div class="hero-copy">
+    <div class="eyebrow">Operations · Data Systems · Security</div>
+    <h1>Runs the systems<br>that keep <span class="accent">people & data</span><br>moving.</h1>
+    <p class="lead">Warehouse operations and security infrastructure specialist with advanced technical data training. Proven track record managing retail inventories, high-stakes personal assistance, and complex donor logistics workflows built with modern automation tools.</p>
+    <div class="cta-row">
+      <a href="#contact" class="btn btn-primary">Get in touch</a>
+      <a href="#experience" class="btn btn-outline">View experience</a>
+    </div>
+    <div class="skill-ticker">
+      <span class="skill-chip">Warehouse Logistics</span>
+      <span class="skill-chip">CCTV Infrastructure</span>
+      <span class="skill-chip">SQL Server / Data Analytics</span>
+      <span class="skill-chip">Excel Automation</span>
+      <span class="skill-chip">UI/UX Layout Design</span>
+      <span class="skill-chip">Crisis Coordination</span>
+    </div>
+  </div>
+</section>
+
+<div class="manifest">
+  <div class="manifest-grid">
+    <div class="stamp">
+      <div class="stamp-icon">✓</div>
+      <div class="stamp-title">Police Clearance</div>
+      <div class="stamp-sub">VALID</div>
+    </div>
+    <div class="stamp">
+      <div class="stamp-icon">✓</div>
+      <div class="stamp-title">Driving License</div>
+      <div class="stamp-sub">VALID · 4 YRS EXP.</div>
+    </div>
+    <div class="stamp">
+      <div class="stamp-icon">✓</div>
+      <div class="stamp-title">Passport</div>
+      <div class="stamp-sub">VALID · INTL TRAVEL</div>
+    </div>
+    <div class="stamp">
+      <div class="stamp-icon">✓</div>
+      <div class="stamp-title">Covid Certificate</div>
+      <div class="stamp-sub">VALID</div>
+    </div>
+    <div class="stamp">
+      <div class="stamp-icon">✓</div>
+      <div class="stamp-title">Medical Fitness</div>
+      <div class="stamp-sub">CONFIRMED</div>
+    </div>
+  </div>
+</div>
+
+<section id="education">
+  <div class="sec-head"><span class="sec-num">01</span><h2>Education & Training</h2><div class="sec-line"></div></div>
+  <div class="edu-list">
+    <div class="edu-item">
+      <span class="edu-code">FAITHTEC</span>
+      <div><div class="edu-name">Data Analytics & Pipeline Management</div><div class="edu-org">Advanced tracking, database design (SQL Server), automated registry formatting</div></div>
+      <span class="pill done">Completed</span>
+    </div>
+    <div class="edu-item">
+      <span class="edu-code">FAITHTEC</span>
+      <div><div class="edu-name">Digital Marketing Strategy</div><div class="edu-org">Hybrid digital structures & metrics execution</div></div>
+      <span class="pill done">Completed</span>
+    </div>
+    <div class="edu-item">
+      <span class="edu-code">FAITHTEC</span>
+      <div><div class="edu-name">UI/UX Design Frameworks</div><div class="edu-org">Figma layouts, interactive interface components, and technical system drafting</div></div>
+      <span class="pill progress">In Progress</span>
+    </div>
+    <div class="edu-item">
+      <span class="edu-code">AVIATION</span>
+      <div><div class="edu-name">Cabin Crew & Executive Protocol</div><div class="edu-org">Self-directed mastery covering international safety regulations, crisis coordination, and premium hospitality standards</div></div>
+      <span class="pill spec">Specialized</span>
+    </div>
+    <div class="edu-item">
+      <span class="edu-code">FAITHTEC</span>
+      <div><div class="edu-name">Community Health & Caregiver Program</div><div class="edu-org">Logistics, advocacy data, and health registry protocols</div></div>
+      <span class="pill done">Completed</span>
+    </div>
+    <div class="edu-item">
+      <span class="edu-code">ALISON</span>
+      <div><div class="edu-name">Diploma in Human Resource Management</div><div class="edu-org">Team leadership, contract operational frameworks, and personnel development</div></div>
+      <span class="pill done">Completed</span>
+    </div>
+    <div class="edu-item">
+      <span class="edu-code">BELL INST.</span>
+      <div><div class="edu-name">CCTV Infrastructure & System Installation</div><div class="edu-org">Bell Institute of Technology — Hardware architecture, wiring, and security systems</div></div>
+      <span class="pill done">Completed</span>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="sec-head"><span class="sec-num">02</span><h2>Skills Architecture</h2><div class="sec-line"></div></div>
+  <div class="skills-grid">
+    <div class="skill-card"><div class="bar-label"><span>Warehouse Logistics & Supply Registry</span><span class="lvl">MASTER</span></div><div class="bar-track"><div class="bar-fill" style="width:94%"></div></div></div>
+    <div class="skill-card"><div class="bar-label"><span>CCTV Architecture & Secure Wiring</span><span class="lvl">STRONG</span></div><div class="bar-track"><div class="bar-fill" style="width:88%"></div></div></div>
+    <div class="skill-card"><div class="bar-label"><span>Data Analytics & Database Management (SQL/Excel)</span><span class="lvl">SOLID</span></div><div class="bar-track"><div class="bar-fill" style="width:82%"></div></div></div>
+    <div class="skill-card"><div class="bar-label"><span>Executive Assistance & Confidential Assignments</span><span class="lvl">HIGH TRUST</span></div><div class="bar-track"><div class="bar-fill" style="width:96%"></div></div></div>
+    <div class="skill-card"><div class="bar-label"><span>High-Pressure Crisis & Cabin Protocols</span><span class="lvl">TRAINED</span></div><div class="bar-track"><div class="bar-fill" style="width:85%"></div></div></div>
+    <div class="skill-card"><div class="bar-label"><span>UI/UX Visual Prototyping (Figma)</span><span class="lvl">LEARNING</span></div><div class="bar-track"><div class="bar-fill" style="width:55%"></div></div></div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="sec-head"><span class="sec-num">03</span><h2>Operational Experience Log</h2><div class="sec-line"></div></div>
+  <div class="timeline">
+    <div class="t-item">
+      <div class="t-date">2026 — Present</div>
+      <div class="t-role">Executive & Personal Operations Assistant</div>
+      <div class="t-org">Confidential Executive Coordination</div>
+      <div class="t-desc">Trusted directly with secure tasks, critical asset navigation, and high-discretion field schedules requiring quick judgment under tight deadlines.</div>
+    </div>
+    <div class="t-item">
+      <div class="t-date">Sept 2025</div>
+      <div class="t-role">National Tech Chapter Lead</div>
+      <div class="t-org">Kujia Kenya Organization</div>
+      <div class="t-desc">Oversaw multi-county structural pipelines and deployment programs. Coordinated logistics with international diaspora chapters across Pretoria and Washington DC while optimizing local community database workflows.</div>
+    </div>
+    <div class="t-item">
+      <div class="t-date">2022 — Present</div>
+      <div class="t-role">Warehouse Management & Inventory Data Volunteer</div>
+      <div class="t-org">Stoma World Kenya</div>
+      <div class="t-desc">Manage the sorting, validation, and layout routing of specialized donation consignments. Built automated data systems to transform legacy hand-written participant records into clean, operational master registers.</div>
+    </div>
+    <div class="t-item">
+      <div class="t-date">2024 — Present</div>
+      <div class="t-role">Independent CCTV Technical Contractor</div>
+      <div class="t-org">Private Infrastructure Deployments</div>
+      <div class="t-desc">Design and implement closed-circuit surveillance setups, structured cable mapping, and local network verification for residential and private hub properties.</div>
+    </div>
+    <div class="t-item">
+      <div class="t-date">May 2020 — Jan 2025</div>
+      <div class="t-role">Property Operations → Hospitality & Logistics Lead</div>
+      <div class="t-org">Harrogate Limited</div>
+      <div class="t-desc">Began with intensive practical property mapping and grounds framework configuration. Promoted to lead interior hospitality functions—managing tracking sheets, standard hygiene compliance, and item stock auditing.</div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="sec-head"><span class="sec-num">04</span><h2>Operational Solutions</h2><div class="sec-line"></div></div>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-tag">Physical Infrastructure</span>
+      <h3>Surveillance & Hardware Design</h3>
+      <p>Strategic network layouts, high-definition camera mapping, and clean wiring setups for residential and asset facilities.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-tag">Supply Chain</span>
+      <h3>Warehouse Infrastructure & Auditing</h3>
+      <p>Transforming disorganized material yards into high-efficiency sorting lines, built on live tracking registers and donor supply lines.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-tag">Data Optimization</span>
+      <h3>Database Design & Registry Automation</h3>
+      <p>Connecting data sources to structured engines like SQL Server or automated Excel layers to track critical registrations smoothly.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-tag">Discreet Liaison</span>
+      <h3>High-Stakes Personal Support</h3>
+      <p>Managing protocol schedules, coordinating fast transport, and handling critical data with absolute operational discretion.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="sec-head"><span class="sec-num">05</span><h2>Secure Registry Portal</h2><div class="sec-line"></div></div>
+  <div class="contact-wrap">
+    <div class="contact-list">
+      <div class="contact-row">
+        <div class="contact-icon">@</div>
+        <div><div class="k">Secure Email</div><div class="v">africhealthorg@gmail.com</div></div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon">T</div>
+        <div><div class="k">Communication Hub</div><div class="v">+254 115 365 558</div></div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon">in</div>
+        <div><div class="k">LinkedIn Verification</div><div class="v">@williamlead46</div></div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon">◎</div>
+        <div><div class="k">Operational Sector</div><div class="v">Nairobi, Kenya</div></div>
+      </div>
+    </div>
+    
+    <form class="form" id="contactForm" action="https://formspree.io/f/YOUR_FORMSPREE_ID_HERE" method="POST">
+      <label for="name">Full name</label>
+      <input type="text" id="name" name="name" placeholder="Your name" required>
+      
+      <label for="email">Identity Email Address</label>
+      <input type="email" id="email" name="email" placeholder="you@example.com" required>
+      
+      <label for="message">Transmission Statement</label>
+      <textarea id="message" name="message" placeholder="Provide assignment context or position specifications..." required></textarea>
+      
+      <button type="submit" class="btn btn-primary" style="width:100%;">Transmit Manifest Entry</button>
+    </form>
+  </div>
+</section>
+
+<footer>© William Nguli Wanyoike · System Manifest Portal</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+
+  document.querySelectorAll('.navlinks a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+    });
+  });
+</script>
+</body>
+</html>

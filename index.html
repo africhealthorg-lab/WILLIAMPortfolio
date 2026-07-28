@@ -115,18 +115,13 @@
   .photo-frame{
     width:100%; aspect-ratio:1/1;
     background:linear-gradient(160deg,#1e232b,#14171c);
-    border:1px dashed var(--amber);
+    border:1px solid var(--amber);
     border-radius:4px;
     display:flex; align-items:center; justify-content:center;
-    color:var(--amber); font-size:0.72rem;
-    font-family:var(--font-mono);
     margin-bottom:18px;
-    text-align:center;
-    letter-spacing:0.05em;
-    padding:20px;
     overflow: hidden;
   }
-  .photo-frame img {
+  .photo-frame video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -315,7 +310,9 @@
       <span class="status-badge">Open to work</span>
     </div>
     <div class="photo-frame">
-      <img src="avatar.jpg" alt="[ PLACE RECTANGLE HEADSHOT HERE ]">
+      <video src="profile-video.mp4" controls playsinline style="width:100%; height:100%; object-fit: cover;">
+        Your browser does not support the video tag.
+      </video>
     </div>
     <div class="id-row"><span class="k">Name</span><span>William N. Wanyoike</span></div>
     <div class="id-row"><span class="k">Nationality</span><span>Kenyan</span></div>
